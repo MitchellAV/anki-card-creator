@@ -1,0 +1,282 @@
+{
+  "meta": { "status": 200 },
+  "data": [
+    {
+      "slug": "仕事",
+      "is_common": true,
+      "tags": ["wanikani11"],
+      "jlpt": ["jlpt-n5"],
+      "japanese": [{ "word": "仕事", "reading": "しごと" }],
+      "senses": [
+        {
+          "english_definitions": [
+            "work",
+            "job",
+            "labor",
+            "labour",
+            "business",
+            "task",
+            "assignment",
+            "occupation",
+            "employment"
+          ],
+          "parts_of_speech": ["Noun", "Suru verb", "Intransitive verb"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        },
+        {
+          "english_definitions": ["work"],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": ["Physics"],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        },
+        {
+          "english_definitions": ["Work"],
+          "parts_of_speech": ["Wikipedia definition"],
+          "links": [
+            {
+              "text": "Read “Work” on English Wikipedia",
+              "url": "http://en.wikipedia.org/wiki/Work?oldid=493759211"
+            },
+            {
+              "text": "Read “仕事” on Japanese Wikipedia",
+              "url": "http://ja.wikipedia.org/wiki/仕事?oldid=39647093"
+            }
+          ],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": [],
+          "sentences": []
+        }
+      ],
+      "attribution": {
+        "jmdict": true,
+        "jmnedict": false,
+        "dbpedia": "http://dbpedia.org/resource/Work"
+      }
+    },
+    {
+      "slug": "仕事場",
+      "is_common": true,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [{ "word": "仕事場", "reading": "しごとば" }],
+      "senses": [
+        {
+          "english_definitions": [
+            "place where one works",
+            "construction site",
+            "working area"
+          ],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事中",
+      "is_common": true,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [{ "word": "仕事中", "reading": "しごとちゅう" }],
+      "senses": [
+        {
+          "english_definitions": ["at work", "in the midst of work", "working"],
+          "parts_of_speech": [
+            "Noun which may take the genitive case particle 'no'"
+          ],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事ぶり",
+      "is_common": false,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [
+        { "word": "仕事ぶり", "reading": "しごとぶり" },
+        { "word": "仕事振り", "reading": "しごとぶり" }
+      ],
+      "senses": [
+        {
+          "english_definitions": ["the way one works", "one's working manner"],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": ["振り ぶり"],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事量",
+      "is_common": false,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [{ "word": "仕事量", "reading": "しごとりょう" }],
+      "senses": [
+        {
+          "english_definitions": [
+            "(one's) workload",
+            "amount of work (to be) done by one"
+          ],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事探し",
+      "is_common": false,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [{ "word": "仕事探し", "reading": "しごとさがし" }],
+      "senses": [
+        {
+          "english_definitions": ["job hunting", "job searching"],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事の虫",
+      "is_common": false,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [{ "word": "仕事の虫", "reading": "しごとのむし" }],
+      "senses": [
+        {
+          "english_definitions": [
+            "workaholic",
+            "person who is totally devoted to his work"
+          ],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事始め",
+      "is_common": true,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [
+        { "word": "仕事始め", "reading": "しごとはじめ" },
+        { "word": "仕事始", "reading": "しごとはじめ" }
+      ],
+      "senses": [
+        {
+          "english_definitions": [
+            "resuming work after the New Year's vacation",
+            "first time that one works in the year"
+          ],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事柄",
+      "is_common": false,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [{ "word": "仕事柄", "reading": "しごとがら" }],
+      "senses": [
+        {
+          "english_definitions": ["for work", "in a manner related to work"],
+          "parts_of_speech": ["Adverb (fukushi)", "Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    },
+    {
+      "slug": "仕事師",
+      "is_common": false,
+      "tags": [],
+      "jlpt": [],
+      "japanese": [{ "word": "仕事師", "reading": "しごとし" }],
+      "senses": [
+        {
+          "english_definitions": ["workman", "enterpriser", "schemer"],
+          "parts_of_speech": ["Noun"],
+          "links": [],
+          "tags": [],
+          "restrictions": [],
+          "see_also": [],
+          "antonyms": [],
+          "source": [],
+          "info": []
+        }
+      ],
+      "attribution": { "jmdict": true, "jmnedict": false, "dbpedia": false }
+    }
+  ]
+}
