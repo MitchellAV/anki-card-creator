@@ -1,5 +1,15 @@
 from typing import Union, List, Any, Optional,TypedDict
 
+class JishoFiltered(TypedDict):
+    word: str
+    is_common: bool
+    jlpt: List[str]
+    kanji: str
+    reading: str
+    is_kana: bool
+    pos: str
+    definition: str
+
 
 class Attribution(TypedDict):
     jmdict: bool

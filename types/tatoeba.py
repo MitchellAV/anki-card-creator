@@ -3,6 +3,12 @@ from enum import Enum
 from datetime import datetime
 
 
+
+
+class TatoebaFiltered(TypedDict):
+    sentence: str
+    translation: str
+    
 class Sentences(TypedDict):
     finder: str
     page: int
