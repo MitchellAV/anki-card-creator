@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import sys
+import csv
 
 sys.path.append('./types')
 
@@ -13,7 +14,8 @@ def create_jisho_url (search_term: str):
 
 
 def create_tatoeba_url (search_term: str):
-    TATOEBA_URL = f"https://tatoeba.org/en/api_v0/search?from=jpn&query={search_term}&to=eng"    
+    # from=jpn&to=eng&
+    TATOEBA_URL = f"https://tatoeba.org/en/api_v0/search?from=jpn&to=eng&query={search_term}"    
     return TATOEBA_URL
 
 def format_jisho_results (results: JishoResponse):
@@ -54,8 +56,14 @@ def format_tatoeba_results (results:TatoebaResponse):
     
     sentence_info = results['results'][0]
     sentence = sentence_info['text']
-    translation_info = sentence_info['translations'][0][0]
-    translation = translation_info['text']
+    translation = ''
+    try:
+        translation_info = sentence_info['translations'][0][0]
+        translation = translation_info['text']
+
+    except:
+        print('No english translation exists on tatoeba')
+    
 
     filtered_data: TatoebaFiltered = {
         "sentence": sentence,
@@ -75,33 +83,57 @@ def get_tatoeba_results (search_term: str):
     url = create_tatoeba_url(search_term)
     r = requests.get(url)
     data:TatoebaResponse = r.json()
-    filtered_data = format_tatoeba_results(data)
+    filtered_data: TatoebaFiltered = {'sentence':'','translation':''}
+    if (len(data['results']) != 0):
+        filtered_data = format_tatoeba_results(data)
     return filtered_data
 
 
 
-search_term = "おおむね"
+search_term = "割増"
 
-print(get_jisho_results(search_term))
-print(get_tatoeba_results(search_term))
+# print(get_jisho_results(search_term))
+# print(get_tatoeba_results(search_term))
 
 word_results = get_jisho_results(search_term)
-sentence_results = get_tatoeba_results(search_term)
+
+sentence_results = get_tatoeba_results(word_results['kanji'])
 
 
 columns = ['Vocabulary-Kanji',	'Vocabulary-Furigana',	'Vocabulary-Kana',	'Vocabulary-English',	'Vocabulary-Audio',	'Vocabulary-Pos',	'Caution',	'Expression',	'Reading',	'Sentence-Kana',	'Sentence-English']		
 
 # row = [word_results['kanji'], '']
 
-is_kana_char = '[カ]'
+is_kana_char = '[カ] '
+JLPT = ", ".join(word_results["jlpt"])
+Vocabulary_Kanji = word_results["kanji"]
+Vocabulary_Furigana= f'{word_results["kanji"]}[{word_results["reading"]}]'
+Vocabulary_Kana=word_results["reading"]
+Vocabulary_English=f'{is_kana_char if word_results["is_kana"] else ""}{word_results["definition"]}'
+Vocabulary_Audio=	''
+Vocabulary_Pos=	word_results["pos"]
+Caution=''
+Expression=sentence_results["sentence"]
+Reading=	sentence_results["sentence"]
+Sentence_Kana=''
+Sentence_English=sentence_results["translation"]
+
+
 
 # df = pd.DataFrame(columns=columns)
+print(f'JLPT: {JLPT}')
+print(f'Vocabulary-Kanji: {Vocabulary_Kanji}')
+print(f'Vocabulary-Furigana: {Vocabulary_Furigana}')
+print(f'Vocabulary-Kana: {Vocabulary_Kana}')
+print(f'Vocabulary-English: {Vocabulary_English}')
+print(f'Vocabulary-Pos: {Vocabulary_Pos}')
+print(f'Expression: {Expression}')
+print(f'Reading: {Reading}')
+print(f'Sentence-English: {Sentence_English}')
 
-print(f'Vocabulary-Kanji: {word_results["kanji"]}')
-print(f'Vocabulary-Furigana: {word_results["kanji"]}[{word_results["reading"]}]')
-print(f'Vocabulary-Kana: {word_results["reading"]}')
-print(f'Vocabulary-English: {is_kana_char if word_results["is_kana"] else None} {word_results["definition"]}')
-print(f'Vocabulary-Pos: {word_results["pos"]}')
-print(f'Expression: {sentence_results["sentence"]}')
-print(f'Reading: {sentence_results["sentence"]}')
-print(f'Sentence-English: {sentence_results["translation"]}')
+row = [Vocabulary_Kanji,Vocabulary_Furigana,Vocabulary_Kana,Vocabulary_English,Vocabulary_Audio,Vocabulary_Pos,Caution,Expression,Reading,Sentence_Kana,Sentence_English]
+with open('word.csv', 'w',encoding='utf-8') as f:
+    # using csv.writer method from CSV package
+    write = csv.writer(f)
+    write.writerow(row)
+
