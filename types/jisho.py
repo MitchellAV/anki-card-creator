@@ -9,6 +9,7 @@ class JishoFiltered(TypedDict):
     is_kana: bool
     pos: str
     definition: str
+    info: str
 
 
 class Attribution(TypedDict):
