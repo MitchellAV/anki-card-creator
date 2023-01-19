@@ -20,8 +20,14 @@ def create_tatoeba_url (search_term: str):
     return TATOEBA_URL
 
 def format_jisho_results (search_term: str, results: JishoResponse):
-    word_info = results['data'][0]
 
+    word_index = 0
+    for index, slug in enumerate(results['data']):
+        if slug['slug'] == search_term:
+            word_index = index
+            break
+    
+    word_info = results['data'][word_index]
     word = word_info['slug']
     is_common = word_info['is_common']
     jlpt = word_info['jlpt']
@@ -119,7 +125,7 @@ def get_jisho_results (search_term: str):
     'is_common': True, 'is_kana':True,'jlpt':[],
     'kanji': '',"pos":'',"reading":'',"word":''}
 
-    if len(data) != 0:
+    if len(data) != 0 and len(data['data']) != 0:
         filtered_data = format_jisho_results(search_term, data)
     return filtered_data
 
@@ -195,6 +201,7 @@ with open('output.csv', 'w', encoding='utf-8', newline='') as f:
     write.writerow(columns)
     for word in list_of_words:
         row = create_anki_card(word)
-        
+        if row[0] == '':
+            pass
         write.writerow(row)
 
