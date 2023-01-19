@@ -1,8 +1,8 @@
 from typing import List
 import requests
-import pandas as pd
 import sys
 import csv
+from furigana import add_furigana
 
 sys.path.append('./types')
 
@@ -133,11 +133,6 @@ def get_tatoeba_results (search_term: str):
     return filtered_data
 
 
-list_of_words: List[str] = []
-
-with open('input.txt', encoding='utf-8') as file:
-    for line in file:
-        list_of_words.append(line.strip())
 
 
 
@@ -149,7 +144,6 @@ def create_anki_card (search_term: str):
     sentence_results = get_tatoeba_results(search_term)
 
 
-    columns = ['Vocabulary-Kanji',	'Vocabulary-Furigana',	'Vocabulary-Kana',	'Vocabulary-English',	'Vocabulary-Audio',	'Vocabulary-Pos',	'Caution',	'Expression',	'Reading',	'Sentence-Kana',	'Sentence-English']		
 
 # row = [word_results['kanji'], '']
 
@@ -157,14 +151,14 @@ def create_anki_card (search_term: str):
 
     jlpt = ", ".join(word_results["jlpt"])
     vocabulary_kanji = word_results["kanji"]
-    vocabulary_Furigana = f'{word_results["kanji"]}[{word_results["reading"]}]'
+    vocabulary_Furigana = f'{add_furigana(word_results["kanji"])}'
     vocabulary_kana = word_results["reading"]
     vocabulary_english = f'{is_kana_char if word_results["is_kana"] else ""}{word_results["definition"]}'
     vocabulary_audio = ''
     vocabulary_pos =	word_results["pos"]
     caution = ''
     expression = sentence_results["sentence"]
-    reading = sentence_results["sentence"]
+    reading = add_furigana(sentence_results["sentence"])
     sentence_kana = ''
     sentence_english = sentence_results["translation"]
 
@@ -184,9 +178,23 @@ def create_anki_card (search_term: str):
 
     return row
 
+
+list_of_words: List[str] = []
+columns = ['Vocabulary-Kanji',	'Vocabulary-Furigana',	'Vocabulary-Kana',	'Vocabulary-English',	'Vocabulary-Audio',	'Vocabulary-Pos',	'Caution',	'Expression',	'Reading',	'Sentence-Kana',	'Sentence-English']		
+
+with open('input.txt', encoding='utf-8') as file:
+    for line in file:
+        list_of_words.append(line.strip())
+
+# remove duplicates from input
+list_of_words = [i for n, i in enumerate(list_of_words) if i not in list_of_words[:n]]
+
+
 with open('output.csv', 'w', encoding='utf-8', newline='') as f:
     write = csv.writer(f)
+    write.writerow(columns)
     for word in list_of_words:
         row = create_anki_card(word)
+        
         write.writerow(row)
 
