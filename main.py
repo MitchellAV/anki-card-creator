@@ -155,7 +155,7 @@ def create_anki_card (search_term: str):
     vocabulary_kana = word_results["reading"]
     vocabulary_english = f'{is_kana_char if word_results["is_kana"] else ""}{word_results["definition"]}'
     vocabulary_audio = ''
-    vocabulary_pos =	word_results["pos"]
+    vocabulary_pos = word_results["pos"]
     caution = ''
     expression = sentence_results["sentence"]
     reading = add_furigana(sentence_results["sentence"])

@@ -62,6 +62,9 @@ def add_furigana(text):
                                 break
                             else:
                                 reading_index_tail = reading_index
+                                # fix if first kana for kanji is the same as kana after kanji 
+                                if reading[reading_index_tail] == token.surface()[next_index]:
+                                    reading_index_tail += 1
                                 while reading[reading_index_tail] != token.surface()[next_index] or (reading_index_tail < len(reading)-1 and reading[reading_index_tail] == reading[reading_index_tail+1]):
                                     reading_index_tail += 1
                                 parsed += to_anki_format(
