@@ -15,6 +15,8 @@ JAPANESE_PUNCTUATION = '　〜！？。、（）：「」『』０１２３４�
 
 SPECIAL_CHARACTERS = '〜'
 
+
+
 def is_japanese_extended(text: str):
     return is_japanese(text) and text not in string.punctuation and text not in JAPANESE_PUNCTUATION
 

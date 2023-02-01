@@ -2,6 +2,7 @@ from typing import List
 import requests
 import sys
 import csv
+from wanakana import strip_okurigana, to_hiragana
 from furigana import add_furigana
 
 sys.path.append('./types')
@@ -14,9 +15,16 @@ def create_jisho_url (search_term: str):
     return JISHO_URL
 
 
-def create_tatoeba_url (search_term: str):
+def create_tatoeba_url (search_term: str, kana: str, is_kana: bool):
     # from=jpn&to=eng&
-    TATOEBA_URL = f'https://tatoeba.org/en/api_v0/search?from=jpn&to=eng&sort=relevance&trans_link=direct&query=@text {search_term}'    
+    # stripped_word = strip_okurigana(search_term)
+    text_query = f'="{search_term}"'
+    # if is_kana:
+    #     text_query = f'="{kana}"'
+    # else:
+    #     text_query = f'="{search_term}"'
+    # print(search_term, kana)
+    TATOEBA_URL = f'https://tatoeba.org/en/api_v0/search?from=jpn&to=eng&trans_link=direct&sort=relevance&query=@text {text_query} @transcription {kana}'    
     return TATOEBA_URL
 
 def format_jisho_results (search_term: str, results: JishoResponse):
@@ -129,8 +137,8 @@ def get_jisho_results (search_term: str):
         filtered_data = format_jisho_results(search_term, data)
     return filtered_data
 
-def get_tatoeba_results (search_term: str):
-    url = create_tatoeba_url(search_term)
+def get_tatoeba_results (search_term: str, kana: str, is_kana: bool):
+    url = create_tatoeba_url(search_term, kana, is_kana)
     r = requests.get(url)
     data:TatoebaResponse = r.json()
     filtered_data: TatoebaFiltered = {'sentence':'','translation':''}
@@ -147,7 +155,13 @@ def create_anki_card (search_term: str):
 
     word_results = get_jisho_results(search_term)
 
-    sentence_results = get_tatoeba_results(search_term)
+    not_allowed_pos = ['ichidan', 'godan']
+    kana = word_results['reading']
+    is_kana = word_results['is_kana']
+    if any(ele in (word_results['pos']).lower() for ele in not_allowed_pos):
+        search_term = word_results['kanji'][:-1]
+        kana = kana[:-1]
+    sentence_results = get_tatoeba_results(search_term, kana, is_kana)
 
 
 
@@ -162,7 +176,7 @@ def create_anki_card (search_term: str):
     vocabulary_english = f'{is_kana_char if word_results["is_kana"] else ""}{word_results["definition"]}'
     vocabulary_audio = ''
     vocabulary_pos = word_results["pos"]
-    caution = ''
+    caution = f'{word_results["info"]}'
     expression = sentence_results["sentence"]
     reading = add_furigana(sentence_results["sentence"])
     sentence_kana = ''
@@ -176,6 +190,7 @@ def create_anki_card (search_term: str):
     print(f'Vocabulary-Kana: {vocabulary_kana}')
     print(f'Vocabulary-English: {vocabulary_english}')
     print(f'Vocabulary-Pos: {vocabulary_pos}')
+    print(f'Caution: {caution}')
     print(f'Expression: {expression}')
     print(f'Reading: {reading}')
     print(f'Sentence-English: {sentence_english}')
