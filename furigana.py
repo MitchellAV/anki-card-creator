@@ -24,7 +24,7 @@ def to_anki_format(index, kanji, reading):
     return '{}{}[{}]'.format(' ' if index > 0 else '', kanji, reading) 
 
 def add_furigana(text):
-    tokens = [m for m in tokenizer_obj.tokenize(text, tokenizer.Tokenizer.SplitMode.C)]
+    tokens = [m for m in tokenizer_obj.tokenize(text, tokenizer.Tokenizer.SplitMode.B)]
     parsed = ''
     token_indexes_to_skip = []
     for index, token in enumerate(tokens):   
