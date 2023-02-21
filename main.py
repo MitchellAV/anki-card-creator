@@ -200,23 +200,25 @@ def create_anki_card (search_term: str):
     return row
 
 
-list_of_words: List[str] = []
-columns = ['Vocabulary-Kanji',	'Vocabulary-Furigana',	'Vocabulary-Kana',	'Vocabulary-English',	'Vocabulary-Audio',	'Vocabulary-Pos',	'Caution',	'Expression',	'Reading',	'Sentence-Kana',	'Sentence-English']		
+def main():
+    list_of_words: List[str] = []
+    columns = ['Vocabulary-Kanji',	'Vocabulary-Furigana',	'Vocabulary-Kana',	'Vocabulary-English',	'Vocabulary-Audio',	'Vocabulary-Pos',	'Caution',	'Expression',	'Reading',	'Sentence-Kana',	'Sentence-English']		
 
-with open('./input/input.txt', encoding='utf-8') as file:
-    for line in file:
-        list_of_words.append(line.strip())
+    with open('./input/input.txt', encoding='utf-8') as file:
+        for line in file:
+            list_of_words.append(line.strip())
 
-# remove duplicates from input
-list_of_words = [i for n, i in enumerate(list_of_words) if i not in list_of_words[:n]]
+    # remove duplicates from input
+    list_of_words = [i for n, i in enumerate(list_of_words) if i not in list_of_words[:n]]
 
+    with open('./output/output.csv', 'w', encoding='utf-8', newline='') as f:
+        write = csv.writer(f)
+        write.writerow(columns)
+        for word in list_of_words:
+            row = create_anki_card(word)
+            if row[0] == '':
+                pass
+            write.writerow(row)
 
-with open('./output/output.csv', 'w', encoding='utf-8', newline='') as f:
-    write = csv.writer(f)
-    write.writerow(columns)
-    for word in list_of_words:
-        row = create_anki_card(word)
-        if row[0] == '':
-            pass
-        write.writerow(row)
-
+if __name__ == "__main__":
+    main()
